@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	An ORM(Object Relation Mapping) tool, 
+	Used in the data layer of applications - persist application data into the database, 
+	Implements JPA - set of standards, rules for persistent implementation.
+	The problem:
+		* Mapping member variables to columns.
+		* Mapping relationships - foreign key primary key relationships need to be taken care of
+		* Handling datatypes - boolean, most databases don't have boolean
+		* Managing changes to object state - updating values has to be done.
+		
+	Saving without hibernate:
+		* JDBC Database configuration
+		* The Model Object
+		* Service method to create the model object
+		* Database design
+		* DAO method to save the object using SQL queries.
+	The Hibernate way:
+		* JDBC Database configuration - Hibernate configuration
+		* The Model Object - Annotations
+		* Service method to create the model object - Use the Hibernate API.
+		* Database design - Not Needed
+		* DAO method to save the object using SQL queries - Not needed!
+-->
+<!--
+  ~ Hibernate, Relational Persistence for Idiomatic Java
+  ~
+  ~ License: GNU Lesser General Public License (LGPL), version 2.1 or later.
+  ~ See the lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>.
+  -->
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>        
+        <property name="connection.url">jdbc:mysql://localhost:3306/hibernatedb</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">Welcome0!</property>
+        
+		<!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
+        
+        <!-- GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '%password%' WITH GRANT OPTION; - 
+        Run this in DB before executing a program for the first time. -->
+
+        <!-- JDBC connection pool (use the built-in) -->
+        <property name="connection.pool_size">10</property>
+
+        <!-- Disable the second-level cache  -->
+        <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+		<!-- <property name="format_sql">true</property>  -->
+		
+        <!-- Drop and re-create the database schema on startup -->
+        <property name="hbm2ddl.auto">update</property>
+
+        <!-- Names the annotated entity class -->
+		<mapping class="com.workouts.basichibernate1.UserDetails"/>
+
+        <!--
+		<mapping resource="org/hibernate/tutorial/hbm/Event.hbm.xml"/> 
+		<class-cache class="org.hibernate.test.cfg.cache.BaseClass" usage="read-write"/>
+		<collection-cache collection="org.hibernate.test.cfg.cache.SubClass.items" usage="read-write" />
+		-->
+		
+		
+    </session-factory>
+
+</hibernate-configuration>

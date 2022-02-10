@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
+        
+        <property name="connection.url">jdbc:mysql://localhost:3306/hibernatedb</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">Welcome0!</property>
+        
+        <!-- GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '%password%' WITH GRANT OPTION; - 
+        Run this in DB before executing a program for the first time. -->
+
+        <!-- JDBC connection pool (use the built-in) -->
+        <property name="connection.pool_size">10</property>
+
+        <!-- Disable the second-level cache  -->
+        <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+		<!-- <property name="format_sql">true</property>  -->
+		
+        <!-- Drop and re-create the database schema on startup -->
+        <property name="hbm2ddl.auto">update</property>
+
+        <!-- Names the annotated entity class -->
+		<mapping class="com.workouts.joinedstrategyinheritance17.Vehicle"/>
+		<mapping class="com.workouts.joinedstrategyinheritance17.TwoWheeler"/>
+		<mapping class="com.workouts.joinedstrategyinheritance17.FourWheeler"/>
+        <!-- <mapping class="org.hibernate.tutorial.annotations.Event"/>
+		<mapping resource="org/hibernate/tutorial/hbm/Event.hbm.xml"/> 
+		<class-cache class="org.hibernate.test.cfg.cache.BaseClass" usage="read-write"/>
+		<collection-cache collection="org.hibernate.test.cfg.cache.SubClass.items" usage="read-write" />
+		-->
+		
+		
+    </session-factory>
+
+</hibernate-configuration>
